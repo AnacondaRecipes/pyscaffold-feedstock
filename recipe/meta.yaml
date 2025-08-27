@@ -1,5 +1,5 @@
 {% set name = "pyscaffold" %}
-{% set version = "4.4" %}
+{% set version = "3.3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,31 +7,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/PyScaffold-{{ version }}.tar.gz
-  sha256: 94088d129b61cd9b4b4607c6a466759b1bb2ada36206d5ac20aa319edcc5d701
+  sha256: 1c3a2b76e60319b6ffc2a8b54e240382109c6241576bf0a47ea476c7194f6a69
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --no-deps -vv
   entry_points:
     - putup = pyscaffold.cli:run
 
-
 requirements:
   host:
-    - python >=3.6
     - pip
-    - setuptools-scm >=5
+    - python
   run:
-    - python >=3.6
-    - platformdirs <3,>=2
-    - configupdater <4,>=3.0
-    - setuptools >=46.1.0
-    - setuptools-scm >=5
-    - tomlkit <2,>=0.7.0
-    - packaging >=20.7
-    - importlib-metadata
-    - colorama >=0.4.4
+    - python
+    - setuptools
 
 test:
   imports:
@@ -39,37 +29,21 @@ test:
     - pyscaffold.templates
   commands:
     - putup --help
-    - pytest -m "not slow and not system" --cov-config setup.cfg -k "not test_issue506 and not test_iterate_entry_points"
-    # - pip check # pytest-shutil has a path.py bug and we cannot run this here.
-  source_files:
-    - tests
-    - setup.cfg
-  requires:
-    - git
-    - pip
-    - setuptools
-    - tomlkit
-    - certifi
-    - tox
-    - python-build
-    - pre-commit
-    - sphinx
-    - flake8
-    - virtualenv
-    - pytest
-    - pytest-cov
-    - pytest-shutil
-    - pytest-virtualenv
-    - pytest-fixture-config
-    - pytest-xdist
-    - twine
 
 about:
   home: https://pyscaffold.org/
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
   summary: Template tool for putting up the scaffold of a Python project
+  description: |
+    PyScaffold is a project generator for bootstrapping high quality Python packages, 
+    ready to be shared on PyPI and installable via pip. It is easy to use and encourages 
+    the adoption of the best tools and practices of the Python ecosystem, helping you and 
+    your team to stay sane, happy and productive. The best part? It is stable and has been 
+    used by thousands of developers for over half a decade!
   dev_url: https://github.com/pyscaffold/pyscaffold/
+  doc_url: https://github.com/pyscaffold/pyscaffold/tree/master/docs
 
 extra:
   recipe-maintainers:
