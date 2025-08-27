@@ -11,7 +11,8 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --no-deps -vv
+  skip: true # [py<34]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - putup = pyscaffold.cli:run
 
@@ -19,15 +20,19 @@ requirements:
   host:
     - pip
     - python
+    - setuptools >=38.3
   run:
     - python
-    - setuptools
+    - setuptools >=38.3
 
 test:
+  requires:
+    - pip
   imports:
     - pyscaffold
     - pyscaffold.templates
   commands:
+    - pip check
     - putup --help
 
 about:
