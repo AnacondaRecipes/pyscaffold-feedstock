@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/PyScaffold-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/PyScaffold-{{ version }}.tar.gz
   sha256: 1c3a2b76e60319b6ffc2a8b54e240382109c6241576bf0a47ea476c7194f6a69
 
 build:
-  number: 0
+  number: 1
   skip: true # [py<34]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
@@ -20,10 +20,10 @@ requirements:
   host:
     - pip
     - python
-    - setuptools >=38.3
+    - setuptools >=38.3,<82
   run:
     - python
-    - setuptools >=38.3
+    - setuptools >=38.3,<82
 
 test:
   requires:
